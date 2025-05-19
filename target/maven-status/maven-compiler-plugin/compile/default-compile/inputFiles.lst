@@ -1,1 +1,6 @@
-C:\Users\maisg\OneDrive\Documents\blog\src\main\java\br\com\richard\blog\BlogApplication.java
+C:\Users\Pelego\Blog\src\main\java\br\com\richard\blog\BlogApplication.java
+C:\Users\Pelego\Blog\src\main\java\br\com\richard\blog\dto\ArtigoRequestDto.java
+C:\Users\Pelego\Blog\src\main\java\br\com\richard\blog\dto\ArtigoResponseDto.java
+C:\Users\Pelego\Blog\src\main\java\br\com\richard\blog\model\Artigo.java
+C:\Users\Pelego\Blog\src\main\java\br\com\richard\blog\repository\ArtigoRepository.java
+C:\Users\Pelego\Blog\src\main\java\br\com\richard\blog\service\ArtigoService.java
