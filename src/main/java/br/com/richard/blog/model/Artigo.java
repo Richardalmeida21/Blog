@@ -1,8 +1,6 @@
 package br.com.richard.blog.model;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
-
 import jakarta.persistence.*;
 
 @Entity
@@ -25,9 +23,23 @@ public class Artigo {
     @Column(nullable = false)
     private LocalDateTime dataPublicacao;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Categoria categoria;
+
     @PrePersist
     public void SalvarDataPublicacao() {
         this.dataPublicacao = LocalDateTime.now();
+    }
+
+    public Artigo() {
+    }
+
+    public Artigo(String titulo, String conteudo, String autor, Categoria categoria) {
+        this.titulo = titulo;
+        this.conteudo = conteudo;
+        this.autor = autor;
+        this.categoria = categoria;
     }
 
     public Long getId() {
@@ -70,59 +82,26 @@ public class Artigo {
         this.dataPublicacao = dataPublicacao;
     }
 
-    public Artigo(Long id, String titulo, String conteudo, String autor, LocalDateTime dataPublicacao) {
-        this.id = id;
-        this.titulo = titulo;
-        this.conteudo = conteudo;
-        this.autor = autor;
-        this.dataPublicacao = dataPublicacao;
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 31 * hash + Objects.hashCode(this.titulo);
-        hash = 31 * hash + Objects.hashCode(this.conteudo);
-        hash = 31 * hash + Objects.hashCode(this.autor);
-        hash = 31 * hash + Objects.hashCode(this.dataPublicacao);
-        return hash;
+        return id != null ? id.hashCode() : 0;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
+        if (this == obj)
             return true;
-        }
-        if (obj == null) {
+        if (obj == null || getClass() != obj.getClass())
             return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Artigo other = (Artigo) obj;
-        if (!Objects.equals(this.titulo, other.titulo)) {
-            return false;
-        }
-        if (!Objects.equals(this.conteudo, other.conteudo)) {
-            return false;
-        }
-        if (!Objects.equals(this.autor, other.autor)) {
-            return false;
-        }
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        return Objects.equals(this.dataPublicacao, other.dataPublicacao);
+        Artigo other = (Artigo) obj;
+        return id != null && id.equals(other.id);
     }
-
-    public Artigo() {
-
-    }
-
-    public Artigo(String titulo, String conteudo, String autor) {
-        this.titulo = titulo;
-        this.conteudo = conteudo;
-        this.autor = autor;
-    }
-
 }
