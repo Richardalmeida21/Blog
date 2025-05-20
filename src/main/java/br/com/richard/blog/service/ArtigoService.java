@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import br.com.richard.blog.dto.ArtigoRequestDto;
 import br.com.richard.blog.dto.ArtigoResponseDto;
 import br.com.richard.blog.model.Artigo;
+import br.com.richard.blog.model.Categoria;
 import br.com.richard.blog.repository.ArtigoRepository;
 
 @Service
@@ -32,7 +33,8 @@ public class ArtigoService {
                                                 artigo.getTitulo(),
                                                 artigo.getConteudo(),
                                                 artigo.getAutor(),
-                                                artigo.getDataPublicacao().toString()))
+                                                artigo.getDataPublicacao().toString(),
+                                                artigo.getCategoria()))
                                 .toList();
         }
 
@@ -44,7 +46,20 @@ public class ArtigoService {
                                 artigo.getTitulo(),
                                 artigo.getConteudo(),
                                 artigo.getAutor(),
-                                artigo.getDataPublicacao().toString());
+                                artigo.getDataPublicacao().toString(),
+                                artigo.getCategoria());
+        }
+
+        public List<ArtigoResponseDto> listarArtigosPorCategoria(Categoria categoria) {
+                List<Artigo> artigos = artigoRepository.findByCategoria(categoria);
+                return artigos.stream()
+                                .map(artigo -> new ArtigoResponseDto(
+                                                artigo.getTitulo(),
+                                                artigo.getConteudo(),
+                                                artigo.getAutor(),
+                                                artigo.getDataPublicacao().toString(),
+                                                artigo.getCategoria()))
+                                .toList();
         }
 
         public void atualizarArtigo(Long id, ArtigoRequestDto artigoDto) {
@@ -54,7 +69,7 @@ public class ArtigoService {
                 artigo.setTitulo(artigoDto.titulo());
                 artigo.setConteudo(artigoDto.conteudo());
                 artigo.setAutor(artigoDto.autor());
-                artigo.setCategoria(artigoDto.categoria()); // Adicione esta linha
+                artigo.setCategoria(artigoDto.categoria());
                 artigoRepository.save(artigo);
         }
 
