@@ -1,0 +1,9 @@
+br\com\richard\blog\config\Security.class
+br\com\richard\blog\dto\ArtigoResponseDto.class
+br\com\richard\blog\dto\ArtigoRequestDto.class
+br\com\richard\blog\model\Artigo.class
+br\com\richard\blog\model\Categoria.class
+br\com\richard\blog\controller\ArtigoController.class
+br\com\richard\blog\BlogApplication.class
+br\com\richard\blog\repository\ArtigoRepository.class
+br\com\richard\blog\service\ArtigoService.class

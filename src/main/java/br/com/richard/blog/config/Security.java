@@ -9,17 +9,19 @@ import org.springframework.http.HttpMethod;
 @Configuration
 public class Security {
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-            .csrf(csrf -> csrf.disable())
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers(HttpMethod.POST, "/artigos/**").authenticated()
-                .requestMatchers(HttpMethod.PUT, "/artigos/**").authenticated()
-                .requestMatchers(HttpMethod.DELETE, "/artigos/**").authenticated()
-                .anyRequest().permitAll()
-            )
-            .httpBasic();
-        return http.build();
-    }
+   @Bean
+public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    http
+        .csrf(csrf -> csrf.disable())
+        .headers(headers -> headers.frameOptions(frame -> frame.sameOrigin())) // <-- Adicione esta linha
+        .authorizeHttpRequests(auth -> auth
+            .requestMatchers(HttpMethod.POST, "/artigos/**").authenticated()
+            .requestMatchers(HttpMethod.PUT, "/artigos/**").authenticated()
+            .requestMatchers(HttpMethod.DELETE, "/artigos/**").authenticated()
+            .anyRequest().permitAll()
+        )
+        .httpBasic();
+    return http.build();
+}
+
 }

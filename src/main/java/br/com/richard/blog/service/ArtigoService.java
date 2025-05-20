@@ -1,5 +1,6 @@
 package br.com.richard.blog.service;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,9 @@ public class ArtigoService {
         @Autowired
         private ArtigoRepository artigoRepository;
 
+        private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
+
         public void criarArtigo(ArtigoRequestDto artigoDto) {
                 Artigo artigo = new Artigo(
                                 artigoDto.titulo(),
@@ -33,11 +37,12 @@ public class ArtigoService {
                                                 artigo.getTitulo(),
                                                 artigo.getConteudo(),
                                                 artigo.getAutor(),
-                                                artigo.getDataPublicacao().toString(),
+                                                artigo.getDataPublicacao().format(FORMATTER), // <-- formatado
                                                 artigo.getCategoria()))
                                 .toList();
         }
 
+        // Faça o mesmo para os outros métodos que retornam ArtigoResponseDto:
         public ArtigoResponseDto buscarArtigoPorId(Long id) {
                 Artigo artigo = artigoRepository.findById(id)
                                 .orElseThrow(() -> new RuntimeException("Artigo não encontrado"));
@@ -46,7 +51,7 @@ public class ArtigoService {
                                 artigo.getTitulo(),
                                 artigo.getConteudo(),
                                 artigo.getAutor(),
-                                artigo.getDataPublicacao().toString(),
+                                artigo.getDataPublicacao().format(FORMATTER), // <-- formatado
                                 artigo.getCategoria());
         }
 
@@ -57,7 +62,7 @@ public class ArtigoService {
                                                 artigo.getTitulo(),
                                                 artigo.getConteudo(),
                                                 artigo.getAutor(),
-                                                artigo.getDataPublicacao().toString(),
+                                                artigo.getDataPublicacao().format(FORMATTER), // <-- formatado
                                                 artigo.getCategoria()))
                                 .toList();
         }

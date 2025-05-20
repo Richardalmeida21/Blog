@@ -1,6 +1,9 @@
-C:\Users\Pelego\Blog\src\main\java\br\com\richard\blog\BlogApplication.java
-C:\Users\Pelego\Blog\src\main\java\br\com\richard\blog\dto\ArtigoRequestDto.java
-C:\Users\Pelego\Blog\src\main\java\br\com\richard\blog\dto\ArtigoResponseDto.java
-C:\Users\Pelego\Blog\src\main\java\br\com\richard\blog\model\Artigo.java
-C:\Users\Pelego\Blog\src\main\java\br\com\richard\blog\repository\ArtigoRepository.java
-C:\Users\Pelego\Blog\src\main\java\br\com\richard\blog\service\ArtigoService.java
+C:\Users\maisg\Documents\Blog\src\main\java\br\com\richard\blog\BlogApplication.java
+C:\Users\maisg\Documents\Blog\src\main\java\br\com\richard\blog\config\Security.java
+C:\Users\maisg\Documents\Blog\src\main\java\br\com\richard\blog\controller\ArtigoController.java
+C:\Users\maisg\Documents\Blog\src\main\java\br\com\richard\blog\dto\ArtigoRequestDto.java
+C:\Users\maisg\Documents\Blog\src\main\java\br\com\richard\blog\dto\ArtigoResponseDto.java
+C:\Users\maisg\Documents\Blog\src\main\java\br\com\richard\blog\model\Artigo.java
+C:\Users\maisg\Documents\Blog\src\main\java\br\com\richard\blog\model\Categoria.java
+C:\Users\maisg\Documents\Blog\src\main\java\br\com\richard\blog\repository\ArtigoRepository.java
+C:\Users\maisg\Documents\Blog\src\main\java\br\com\richard\blog\service\ArtigoService.java
