@@ -93,4 +93,17 @@ public class ArtigoController {
     public ResponseEntity<List<Map<String, Object>>> listarArtigosCompletos() {
         return listarArtigos();
     }
+
+    @PutMapping("/{codigo}")
+    public ResponseEntity<Void> atualizarArtigo(@PathVariable String codigo, @RequestBody ArtigoRequestDto artigoDto) {
+        artigoService.atualizarArtigo(codigo, artigoDto);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/{codigo}")
+    public ResponseEntity<Void> deletarArtigo(@PathVariable String codigo) {
+        artigoService.deletarArtigo(codigo);
+        return ResponseEntity.noContent().build();
+    }
+    
 }
