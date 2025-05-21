@@ -2,10 +2,8 @@ package br.com.richard.blog.service;
 
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import br.com.richard.blog.dto.ArtigoRequestDto;
 import br.com.richard.blog.dto.ArtigoResponseDto;
 import br.com.richard.blog.model.Artigo;
