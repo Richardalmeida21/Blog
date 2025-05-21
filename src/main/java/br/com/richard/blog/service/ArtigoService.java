@@ -47,7 +47,7 @@ public class ArtigoService {
                                 .orElseThrow(() -> new RuntimeException("Artigo não encontrado"));
 
                 return new ArtigoResponseDto(
-                                artigo.getId(), // Adicione o ID aqui
+                                artigo.getId(), 
                                 artigo.getTitulo(),
                                 artigo.getConteudo(),
                                 artigo.getAutor(),
