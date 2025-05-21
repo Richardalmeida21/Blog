@@ -1,17 +1,12 @@
 package br.com.richard.blog.controller;
 
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import br.com.richard.blog.dto.ArtigoRequestDto;
 import br.com.richard.blog.dto.ArtigoResponseDto;
@@ -38,21 +33,59 @@ public class ArtigoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ArtigoResponseDto>> listarArtigos() {
+    public ResponseEntity<List<Map<String, Object>>> listarArtigos() {
         List<ArtigoResponseDto> artigos = artigoService.listarArtigos();
-        return ResponseEntity.ok(artigos);
+        
+        // Conversão manual para Map para garantir todos os campos
+        List<Map<String, Object>> resultado = artigos.stream()
+            .map(a -> {
+                Map<String, Object> map = new HashMap<>();
+                map.put("id", a.id());
+                map.put("titulo", a.titulo());
+                map.put("conteudo", a.conteudo());
+                map.put("autor", a.autor());
+                map.put("dataPublicacao", a.dataPublicacao());
+                map.put("categoria", a.categoria());
+                return map;
+            })
+            .collect(Collectors.toList());
+        
+        return ResponseEntity.ok(resultado);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ArtigoResponseDto> buscarArtigoPorId(@PathVariable Long id) {
+    public ResponseEntity<Map<String, Object>> buscarArtigoPorId(@PathVariable Long id) {
         ArtigoResponseDto artigo = artigoService.buscarArtigoPorId(id);
-        return ResponseEntity.ok(artigo);
+        
+        Map<String, Object> resultado = new HashMap<>();
+        resultado.put("id", artigo.id());
+        resultado.put("titulo", artigo.titulo());
+        resultado.put("conteudo", artigo.conteudo());
+        resultado.put("autor", artigo.autor());
+        resultado.put("dataPublicacao", artigo.dataPublicacao());
+        resultado.put("categoria", artigo.categoria());
+        
+        return ResponseEntity.ok(resultado);
     }
 
     @GetMapping("/categoria/{categoria}")
-    public ResponseEntity<List<ArtigoResponseDto>> listarArtigosPorCategoria(@PathVariable Categoria categoria) {
+    public ResponseEntity<List<Map<String, Object>>> listarArtigosPorCategoria(@PathVariable Categoria categoria) {
         List<ArtigoResponseDto> artigos = artigoService.listarArtigosPorCategoria(categoria);
-        return ResponseEntity.ok(artigos);
+        
+        // Conversão manual para Map para garantir todos os campos
+        List<Map<String, Object>> resultado = artigos.stream()
+            .map(a -> {
+                Map<String, Object> map = new HashMap<>();
+                map.put("id", a.id());
+                map.put("titulo", a.titulo());
+                map.put("conteudo", a.conteudo());
+                map.put("autor", a.autor());
+                map.put("dataPublicacao", a.dataPublicacao());
+                map.put("categoria", a.categoria());
+                return map;
+            })
+            .collect(Collectors.toList());
+        
+        return ResponseEntity.ok(resultado);
     }
-
 }
