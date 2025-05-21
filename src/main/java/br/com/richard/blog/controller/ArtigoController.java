@@ -34,7 +34,7 @@ public class ArtigoController {
 
     @GetMapping("/test")
     public String test() {
-        return "API version 2.0"; // Mude para qualquer versão para confirmar o deploy
+        return "API version 3.0"; 
     }
 
     @GetMapping
