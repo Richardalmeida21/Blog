@@ -1,6 +1,7 @@
 package br.com.richard.blog.model;
 
 import java.time.LocalDateTime;
+import java.util.Random;
 import jakarta.persistence.*;
 
 @Entity
@@ -8,8 +9,11 @@ import jakarta.persistence.*;
 public class Artigo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Mude para IDENTITY em vez de SEQUENCE
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    @Column(name = "codigo", unique = true)
+    private String codigo;
 
     @Column(nullable = false)
     private String titulo;
@@ -28,8 +32,10 @@ public class Artigo {
     private Categoria categoria;
 
     @PrePersist
-    public void SalvarDataPublicacao() {
+    public void prePersist() {
         this.dataPublicacao = LocalDateTime.now();
+        // Gerar um código único e amigável
+        this.codigo = "A" + (new Random().nextInt(900000) + 100000);
     }
 
     public Artigo() {
@@ -48,6 +54,14 @@ public class Artigo {
 
     public void setId(Long id) {
         this.id = id;
+    }
+    
+    public String getCodigo() {
+        return codigo;
+    }
+    
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
     public String getTitulo() {

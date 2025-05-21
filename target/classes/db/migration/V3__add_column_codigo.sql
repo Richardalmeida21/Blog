@@ -1,0 +1,3 @@
+ALTER TABLE artigos ADD COLUMN codigo VARCHAR(10);
+ALTER TABLE artigos ADD CONSTRAINT artigos_codigo_uk UNIQUE (codigo);
+UPDATE artigos SET codigo = 'A' || TO_CHAR(FLOOR(DBMS_RANDOM.VALUE(100000, 999999))) WHERE codigo IS NULL;

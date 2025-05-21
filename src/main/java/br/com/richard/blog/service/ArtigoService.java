@@ -30,13 +30,7 @@ public class ArtigoService {
         public List<ArtigoResponseDto> listarArtigos() {
                 List<Artigo> artigos = artigoRepository.findAll();
                 return artigos.stream()
-                                .map(artigo -> new ArtigoResponseDto(
-                                                artigo.getId(), // Adicione o ID aqui
-                                                artigo.getTitulo(),
-                                                artigo.getConteudo(),
-                                                artigo.getAutor(),
-                                                artigo.getDataPublicacao().format(FORMATTER),
-                                                artigo.getCategoria()))
+                                .map(this::converterParaDto)
                                 .toList();
         }
 
@@ -44,25 +38,13 @@ public class ArtigoService {
                 Artigo artigo = artigoRepository.findById(id)
                                 .orElseThrow(() -> new RuntimeException("Artigo não encontrado"));
 
-                return new ArtigoResponseDto(
-                                artigo.getId(), 
-                                artigo.getTitulo(),
-                                artigo.getConteudo(),
-                                artigo.getAutor(),
-                                artigo.getDataPublicacao().format(FORMATTER),
-                                artigo.getCategoria());
+                return converterParaDto(artigo);
         }
 
         public List<ArtigoResponseDto> listarArtigosPorCategoria(Categoria categoria) {
                 List<Artigo> artigos = artigoRepository.findByCategoria(categoria);
                 return artigos.stream()
-                                .map(artigo -> new ArtigoResponseDto(
-                                                artigo.getId(), // Adicione o ID aqui
-                                                artigo.getTitulo(),
-                                                artigo.getConteudo(),
-                                                artigo.getAutor(),
-                                                artigo.getDataPublicacao().format(FORMATTER),
-                                                artigo.getCategoria()))
+                                .map(this::converterParaDto)
                                 .toList();
         }
 
@@ -83,4 +65,18 @@ public class ArtigoService {
                 artigoRepository.delete(artigo);
         }
 
+        private ArtigoResponseDto converterParaDto(Artigo artigo) {
+                return new ArtigoResponseDto(
+                        artigo.getId(),
+                        artigo.getCodigo(),
+                        artigo.getTitulo(),
+                        artigo.getConteudo(),
+                        artigo.getAutor(),
+                        formatarData(artigo.getDataPublicacao()),
+                        artigo.getCategoria());
+        }
+
+        private String formatarData(java.time.LocalDateTime data) {
+                return data.format(FORMATTER);
+        }
 }
