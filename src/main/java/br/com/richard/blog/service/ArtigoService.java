@@ -20,7 +20,6 @@ public class ArtigoService {
 
         private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
-
         public void criarArtigo(ArtigoRequestDto artigoDto) {
                 Artigo artigo = new Artigo(
                                 artigoDto.titulo(),
@@ -34,24 +33,25 @@ public class ArtigoService {
                 List<Artigo> artigos = artigoRepository.findAll();
                 return artigos.stream()
                                 .map(artigo -> new ArtigoResponseDto(
+                                                artigo.getId(), // Adicione o ID aqui
                                                 artigo.getTitulo(),
                                                 artigo.getConteudo(),
                                                 artigo.getAutor(),
-                                                artigo.getDataPublicacao().format(FORMATTER), // <-- formatado
+                                                artigo.getDataPublicacao().format(FORMATTER),
                                                 artigo.getCategoria()))
                                 .toList();
         }
 
-        // Faça o mesmo para os outros métodos que retornam ArtigoResponseDto:
         public ArtigoResponseDto buscarArtigoPorId(Long id) {
                 Artigo artigo = artigoRepository.findById(id)
                                 .orElseThrow(() -> new RuntimeException("Artigo não encontrado"));
 
                 return new ArtigoResponseDto(
+                                artigo.getId(), // Adicione o ID aqui
                                 artigo.getTitulo(),
                                 artigo.getConteudo(),
                                 artigo.getAutor(),
-                                artigo.getDataPublicacao().format(FORMATTER), // <-- formatado
+                                artigo.getDataPublicacao().format(FORMATTER),
                                 artigo.getCategoria());
         }
 
@@ -59,10 +59,11 @@ public class ArtigoService {
                 List<Artigo> artigos = artigoRepository.findByCategoria(categoria);
                 return artigos.stream()
                                 .map(artigo -> new ArtigoResponseDto(
+                                                artigo.getId(), // Adicione o ID aqui
                                                 artigo.getTitulo(),
                                                 artigo.getConteudo(),
                                                 artigo.getAutor(),
-                                                artigo.getDataPublicacao().format(FORMATTER), // <-- formatado
+                                                artigo.getDataPublicacao().format(FORMATTER),
                                                 artigo.getCategoria()))
                                 .toList();
         }
