@@ -8,7 +8,8 @@ import jakarta.persistence.*;
 public class Artigo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "artigo_sequence")
+    @SequenceGenerator(name = "artigo_sequence", sequenceName = "artigo_seq", allocationSize = 1)
     private Long id;
 
     @Column(nullable = false)
