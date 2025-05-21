@@ -40,6 +40,14 @@ public class ArtigoService {
 
                 return converterParaDto(artigo);
         }
+        
+        // Novo método para buscar por código
+        public ArtigoResponseDto buscarArtigoPorCodigo(String codigo) {
+                Artigo artigo = artigoRepository.findByCodigo(codigo)
+                                .orElseThrow(() -> new RuntimeException("Artigo com código " + codigo + " não encontrado"));
+
+                return converterParaDto(artigo);
+        }
 
         public List<ArtigoResponseDto> listarArtigosPorCategoria(Categoria categoria) {
                 List<Artigo> artigos = artigoRepository.findByCategoria(categoria);
@@ -58,10 +66,29 @@ public class ArtigoService {
                 artigo.setCategoria(artigoDto.categoria());
                 artigoRepository.save(artigo);
         }
+        
+        // Novo método para atualizar por código
+        public void atualizarArtigoPorCodigo(String codigo, ArtigoRequestDto artigoDto) {
+                Artigo artigo = artigoRepository.findByCodigo(codigo)
+                                .orElseThrow(() -> new RuntimeException("Artigo com código " + codigo + " não encontrado"));
+
+                artigo.setTitulo(artigoDto.titulo());
+                artigo.setConteudo(artigoDto.conteudo());
+                artigo.setAutor(artigoDto.autor());
+                artigo.setCategoria(artigoDto.categoria());
+                artigoRepository.save(artigo);
+        }
 
         public void deletarArtigo(Long id) {
                 Artigo artigo = artigoRepository.findById(id)
                                 .orElseThrow(() -> new RuntimeException("Artigo não encontrado"));
+                artigoRepository.delete(artigo);
+        }
+        
+        // Novo método para deletar por código
+        public void deletarArtigoPorCodigo(String codigo) {
+                Artigo artigo = artigoRepository.findByCodigo(codigo)
+                                .orElseThrow(() -> new RuntimeException("Artigo com código " + codigo + " não encontrado"));
                 artigoRepository.delete(artigo);
         }
 

@@ -27,8 +27,8 @@ public class ArtigoController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @GetMapping("/completos")
-    public ResponseEntity<List<Map<String, Object>>> listarArtigosCompletos() {
+    @GetMapping
+    public ResponseEntity<List<Map<String, Object>>> listarArtigos() {
         List<ArtigoResponseDto> artigos = artigoService.listarArtigos();
 
         List<Map<String, Object>> resultado = artigos.stream()
@@ -47,26 +47,50 @@ public class ArtigoController {
         return ResponseEntity.ok(resultado);
     }
 
-    @GetMapping
-    public ResponseEntity<List<ArtigoResponseDto>> listarArtigos() {
-        List<ArtigoResponseDto> artigos = artigoService.listarArtigos();
-        return ResponseEntity.ok(artigos);
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<ArtigoResponseDto> buscarArtigoPorId(@PathVariable Long id) {
-        ArtigoResponseDto artigo = artigoService.buscarArtigoPorId(id);
-        return ResponseEntity.ok(artigo);
+    // Novo método para buscar por código
+    @GetMapping("/{codigo}")
+    public ResponseEntity<Map<String, Object>> buscarArtigoPorCodigo(@PathVariable String codigo) {
+        ArtigoResponseDto artigo = artigoService.buscarArtigoPorCodigo(codigo);
+        
+        Map<String, Object> resultado = new HashMap<>();
+        resultado.put("codigo", artigo.codigo());
+        resultado.put("titulo", artigo.titulo());
+        resultado.put("conteudo", artigo.conteudo());
+        resultado.put("autor", artigo.autor());
+        resultado.put("dataPublicacao", artigo.dataPublicacao());
+        resultado.put("categoria", artigo.categoria());
+        
+        return ResponseEntity.ok(resultado);
     }
 
     @GetMapping("/categoria/{categoria}")
-    public ResponseEntity<List<ArtigoResponseDto>> listarArtigosPorCategoria(@PathVariable Categoria categoria) {
+    public ResponseEntity<List<Map<String, Object>>> listarArtigosPorCategoria(@PathVariable Categoria categoria) {
         List<ArtigoResponseDto> artigos = artigoService.listarArtigosPorCategoria(categoria);
-        return ResponseEntity.ok(artigos);
+        
+        List<Map<String, Object>> resultado = artigos.stream()
+                .map(a -> {
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("codigo", a.codigo());
+                    map.put("titulo", a.titulo());
+                    map.put("conteudo", a.conteudo());
+                    map.put("autor", a.autor());
+                    map.put("dataPublicacao", a.dataPublicacao());
+                    map.put("categoria", a.categoria());
+                    return map;
+                })
+                .collect(Collectors.toList());
+        
+        return ResponseEntity.ok(resultado);
     }
 
     @GetMapping("/test")
     public String test() {
-        return "API version 3.0";
+        return "API version 4.0";
+    }
+    
+    // Mantém o endpoint /completos para compatibilidade
+    @GetMapping("/completos")
+    public ResponseEntity<List<Map<String, Object>>> listarArtigosCompletos() {
+        return listarArtigos();
     }
 }
