@@ -40,7 +40,7 @@ public class ArtigoController {
         List<Map<String, Object>> resultado = artigos.stream()
             .map(a -> {
                 Map<String, Object> map = new HashMap<>();
-                map.put("id", a.id());
+                map.put("id", String.valueOf(a.id()));  // Convertendo para String
                 map.put("titulo", a.titulo());
                 map.put("conteudo", a.conteudo());
                 map.put("autor", a.autor());
@@ -58,7 +58,7 @@ public class ArtigoController {
         ArtigoResponseDto artigo = artigoService.buscarArtigoPorId(id);
         
         Map<String, Object> resultado = new HashMap<>();
-        resultado.put("id", artigo.id());
+        resultado.put("id", String.valueOf(artigo.id()));  // Convertendo para String
         resultado.put("titulo", artigo.titulo());
         resultado.put("conteudo", artigo.conteudo());
         resultado.put("autor", artigo.autor());
@@ -76,7 +76,7 @@ public class ArtigoController {
         List<Map<String, Object>> resultado = artigos.stream()
             .map(a -> {
                 Map<String, Object> map = new HashMap<>();
-                map.put("id", a.id());
+                map.put("id", String.valueOf(a.id()));  // Convertendo para String
                 map.put("titulo", a.titulo());
                 map.put("conteudo", a.conteudo());
                 map.put("autor", a.autor());
