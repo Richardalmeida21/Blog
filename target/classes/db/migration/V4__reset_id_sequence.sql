@@ -1,10 +1,7 @@
--- Limpar a tabela primeiro
 TRUNCATE TABLE artigos;
 
--- Recriar a tabela do zero
 DROP TABLE IF EXISTS artigos;
 
--- Criar nova tabela usando serial para IDs auto-incrementados
 CREATE TABLE artigos (
   id SERIAL PRIMARY KEY,
   titulo VARCHAR(255) NOT NULL,
