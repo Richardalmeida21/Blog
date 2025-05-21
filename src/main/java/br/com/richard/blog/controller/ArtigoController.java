@@ -18,6 +18,7 @@ import br.com.richard.blog.service.ArtigoService;
 
 @RestController
 @RequestMapping("/artigos")
+@CrossOrigin(origins = "*")
 public class ArtigoController {
 
     @Autowired
