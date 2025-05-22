@@ -1,7 +1,0 @@
-CREATE TABLE artigos (
-    id BIGSERIAL PRIMARY KEY,
-    titulo VARCHAR(255) NOT NULL,
-    conteudo TEXT NOT NULL,
-    autor VARCHAR(100) NOT NULL,
-    data_publicacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
