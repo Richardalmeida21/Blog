@@ -93,17 +93,17 @@ public class ArtigoService {
         }
 
         private ArtigoResponseDto converterParaDto(Artigo artigo) {
-                return new ArtigoResponseDto(
-                        artigo.getId(),
-                        artigo.getCodigo(),
-                        artigo.getTitulo(),
-                        artigo.getConteudo(),
-                        artigo.getAutor(),
-                        formatarData(artigo.getDataPublicacao()),
-                        artigo.getCategoria());
-        }
+    return new ArtigoResponseDto(
+            artigo.getId(),
+            artigo.getCodigo(),
+            artigo.getTitulo(),
+            artigo.getConteudo(),
+            artigo.getAutor(),
+            formatarData(artigo.getDataPublicacao()),
+            artigo.getCategoria());
+}
 
-        private String formatarData(java.time.LocalDateTime data) {
-                return data.format(FORMATTER);
-        }
+private String formatarData(java.time.LocalDateTime data) {
+    return data.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+}
 }
