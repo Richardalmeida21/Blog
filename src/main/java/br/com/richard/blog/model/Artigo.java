@@ -2,7 +2,16 @@ package br.com.richard.blog.model;
 
 import java.time.LocalDateTime;
 import java.util.Random;
-import jakarta.persistence.*;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "artigos")
@@ -11,14 +20,14 @@ public class Artigo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @Column(name = "codigo", unique = true)
     private String codigo;
 
     @Column(nullable = false)
     private String titulo;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String conteudo;
 
     @Column(nullable = false)
@@ -55,11 +64,11 @@ public class Artigo {
     public void setId(Long id) {
         this.id = id;
     }
-    
+
     public String getCodigo() {
         return codigo;
     }
-    
+
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }

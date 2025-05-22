@@ -106,13 +106,13 @@ public class ArtigoController {
 
     @PutMapping("/{codigo}")
     public ResponseEntity<Void> atualizarArtigo(@PathVariable String codigo, @RequestBody ArtigoRequestDto artigoDto) {
-        artigoService.atualizarArtigoPorCodigo(codigo, artigoDto); // Corrigido para usar o método correto
+        artigoService.atualizarArtigoPorCodigo(codigo, artigoDto); 
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{codigo}")
     public ResponseEntity<Void> deletarArtigo(@PathVariable String codigo) {
-        artigoService.deletarArtigoPorCodigo(codigo); // Corrigido para usar o método correto
+        artigoService.deletarArtigoPorCodigo(codigo); 
         return ResponseEntity.noContent().build();
     }
 
